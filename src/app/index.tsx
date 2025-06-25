@@ -1,12 +1,12 @@
 /** @format */
 
-import DocumentData from "@/assets/Icons/DocumentData";
-import Gradient from "@/assets/Icons/Gradient";
-import LightBulbPerson from "@/assets/Icons/LightbulbPerson";
-import Logo from "@/assets/Icons/Logo";
-import Rocket from "@/assets/Icons/Rocket";
-import { Box } from "@/components/ui/box";
-import { Text } from "@/components/ui/text";
+import DocumentData from "@/src/assets/Icons/DocumentData";
+import Gradient from "@/src/assets/Icons/Gradient";
+import LightBulbPerson from "@/src/assets/Icons/LightbulbPerson";
+import Logo from "@/src/assets/Icons/Logo";
+import Rocket from "@/src/assets/Icons/Rocket";
+import { Box } from "@/src/components/ui/box";
+import { Text } from "@/src/components/ui/text";
 import React from "react";
 import { ScrollView } from "react-native";
 
@@ -51,8 +51,9 @@ export default function Home() {
 						</Box>
 						<Link href={"/tabs/" as Href}>
 							<Box className="bg-background-template py-2 px-6 rounded-full items-center flex-column sm:flex-row md:self-start">
-								<Text className="text-typography-white font-normal text-2xl">
-									Explore Tab Navigation cook
+								<Text className="text-typography-white font-normal text-xs">
+									Explore Tab Navigation did i cook react 19
+									sdk 53
 								</Text>
 							</Box>
 						</Link>
