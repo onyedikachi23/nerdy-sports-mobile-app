@@ -11,9 +11,9 @@ import {
 import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import "../global.css";
+import "../../global.css";
 
 export {
 	// Catch any errors thrown by the Layout component.
@@ -26,15 +26,15 @@ export {
 // };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+void SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
 	const [loaded, error] = useFonts({
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
 		...FontAwesome.font,
 	});
 
-	const [styleLoaded, setStyleLoaded] = useState(false);
 	// Expo Router uses Error Boundaries to catch errors in the navigation tree.
 	useEffect(() => {
 		if (error) throw error;
@@ -42,7 +42,7 @@ export default function RootLayout() {
 
 	useEffect(() => {
 		if (loaded) {
-			SplashScreen.hideAsync();
+			void SplashScreen.hideAsync();
 		}
 	}, [loaded]);
 
