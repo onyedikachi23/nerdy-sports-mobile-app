@@ -2,19 +2,19 @@
 
 import React from "react";
 
-import { Box } from "@/src/components/ui/box";
-import { Text } from "@/src/components/ui/text";
+import { Box } from "@/components/ui/box";
+import { Text } from "@/components/ui/text";
 import { ExternalLink } from "./ExternalLink";
 
 export default function EditScreenInfo({ path }: { path: string }) {
 	return (
 		<Box>
-			<Box className="items-center mx-4">
+			<Box className="mx-4 items-center">
 				<Text className="text-center text-black/80">
 					Open up the code for this screen:
 				</Text>
-				<Box className="rounded-sm px-1 my-2 bg-secondary-200">
-					<Text className="text-sm leading-5 text-center font-SpaceMono">
+				<Box className="my-2 rounded-sm bg-secondary-200 px-1">
+					<Text className="font-SpaceMono text-center text-sm leading-5">
 						{path}
 					</Text>
 				</Box>
@@ -25,7 +25,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
 				</Text>
 			</Box>
 
-			<Box className="mt-4 mx-5 items-center">
+			<Box className="mx-5 mt-4 items-center">
 				<ExternalLink
 					style={{ paddingVertical: 15 }}
 					href="https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet">

@@ -1,15 +1,13 @@
 /** @format */
 
+import EditScreenInfo from "@/components/EditScreenInfo";
+import { Box } from "@/components/ui/box";
 import { StatusBar } from "expo-status-bar";
-import { Platform } from "react-native";
-
-import EditScreenInfo from "@/src/components/EditScreenInfo";
-import { Box } from "@/src/components/ui/box";
-import { Text } from "@/src/components/ui/text";
+import { Platform, Text } from "react-native";
 
 export default function ModalScreen() {
 	return (
-		<Box className=" flex flex-1 items-center justify-center">
+		<Box className="flex flex-1 items-center justify-center">
 			<Text className="text-xl font-bold">Modal</Text>
 			<Box className="my-[30px] h-1 w-[80%]" />
 			<EditScreenInfo path="app/modal.tsx" />

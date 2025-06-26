@@ -29,6 +29,6 @@
 		"nativewind-env.d.ts"
 	],
 	"exclude": [
-		"src/components/ui/**/*" // managed by gluestack-ui
+		// "src/components/ui/**/*" // managed by gluestack-ui
 	]
 }

@@ -1,9 +1,8 @@
 /** @format */
 
+import { Center } from "@/components/ui/center";
 import { Link, Stack } from "expo-router";
-
-import { Center } from "@/src/components/ui/center";
-import { Text } from "@/src/components/ui/text";
+import { Text } from "react-native";
 
 export default function NotFoundScreen() {
 	return (

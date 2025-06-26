@@ -1,86 +1,110 @@
 /** @format */
 
-import DocumentData from "@/src/assets/Icons/DocumentData";
-import Gradient from "@/src/assets/Icons/Gradient";
-import LightBulbPerson from "@/src/assets/Icons/LightbulbPerson";
-import Logo from "@/src/assets/Icons/Logo";
-import Rocket from "@/src/assets/Icons/Rocket";
-import { Box } from "@/src/components/ui/box";
-import { Text } from "@/src/components/ui/text";
-import React from "react";
-import { ScrollView } from "react-native";
+import {
+	Button,
+	ButtonText,
+	ButtonSpinner,
+	ButtonIcon,
+} from "@/components/ui/button";
 
-import { Href, Link } from "expo-router";
+/** @format */
 
-const FeatureCard = ({ iconSvg: IconSvg, name, desc }: any) => {
+import { Bell, Search, TrendingUp, Users } from "lucide-react-native";
+import type React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+const HomeScreen: React.FC = () => {
 	return (
-		<Box
-			className="flex-column border border-w-1 border-outline-700 md:flex-1 m-2 p-4 rounded"
-			key={name}>
-			<Box className="items-center flex flex-row">
-				<Text>
-					<IconSvg />
-				</Text>
-				<Text className="text-typography-white font-medium ml-2 text-xl">
-					{name}
-				</Text>
-			</Box>
-			<Text className="text-typography-400 mt-2">{desc}</Text>
-		</Box>
+		<SafeAreaView className="flex-1 bg-background-0">
+			<View className="flex-1 px-6 pt-8">
+				{/* Header */}
+				<View className="mb-8 flex flex-row items-center justify-between">
+					<View>
+						<Text className="flex text-lg text-primary-500">
+							NerdySports
+						</Text>
+						<Text className="mt-1 text-error-500">
+							Welcome back!
+						</Text>
+					</View>
+					<View className="relative">
+						<Bell size={24} color="rgb(163 163 163)" />
+						<View className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-success-500" />
+					</View>
+				</View>
+
+				{/* Search */}
+				<View className="mb-8 flex-row items-center rounded-xl bg-secondary-100 px-4 py-3">
+					<Search size={20} color="rgb(140 140 140)" />
+					<Text className="ml-3 flex-1 text-typography-400">
+						Search players, teams...
+					</Text>
+				</View>
+
+				{/* Stats Cards */}
+				<View className="mb-8 flex-row justify-between">
+					<View className="mr-3 flex-1 rounded-xl bg-secondary-500 p-4 text-sm shadow-sm">
+						<View className="flex-row items-center justify-between">
+							<View>
+								<Text className="text-2xl font-bold text-typography-950">
+									2.8K
+								</Text>
+								<Text className="text-sm text-typography-500">
+									Players
+								</Text>
+							</View>
+							<View className="rounded-lg bg-info-500 p-2">
+								<Users size={20} color="white" />
+							</View>
+						</View>
+					</View>
+
+					<View className="ml-3 flex-1 rounded-xl bg-secondary-100 p-4">
+						<View className="flex-row items-center justify-between">
+							<View>
+								<Text className="text-2xl font-bold text-typography-950">
+									156
+								</Text>
+								<Text className="text-blue-400">Scouts</Text>
+							</View>
+							<View className="rounded-lg bg-success-500 p-2">
+								<TrendingUp size={20} color="white" />
+							</View>
+						</View>
+					</View>
+				</View>
+
+				{/* Quick Actions */}
+				<View className="space-y-4">
+					<Text>Maybe</Text>
+					<TouchableOpacity className="rounded-xl bg-white px-6 py-4">
+						<Text className="bg-white text-center text-3xl font-semibold text-typography-0">
+							Scout New Talent
+						</Text>
+					</TouchableOpacity>
+
+					<TouchableOpacity className="rounded-xl border border-outline-300 bg-secondary-100 px-6 py-4">
+						<Text className="text-center text-4xl font-semibold text-typography-950">
+							Browse Teams
+						</Text>
+					</TouchableOpacity>
+
+					<TouchableOpacity className="rounded-xl border border-outline-300 bg-secondary-100 px-6 py-4">
+						<Text className="text-center text-lg font-semibold text-typography-950">
+							View Live Games
+						</Text>
+					</TouchableOpacity>
+				</View>
+
+				<Button
+					action={"primary"}
+					variant={"solid"}
+					size={"lg"}
+					isDisabled={false}>
+					<ButtonText>Hello World</ButtonText>
+				</Button>
+			</View>
+		</SafeAreaView>
 	);
 };
-
-export default function Home() {
-	return (
-		<Box className="flex-1 bg-black h-[100vh]">
-			<ScrollView
-				style={{ height: "100%" }}
-				contentContainerStyle={{ flexGrow: 1 }}>
-				<Box className="absolute h-[500px] w-[500px] lg:w-[700px] lg:h-[700px]">
-					<Gradient />
-				</Box>
-				<Box className="flex flex-1 items-center my-16 mx-5 lg:my-24 lg:mx-32">
-					<Box className="gap-10 base:flex-col sm:flex-row justify-between sm:w-[80%] md:flex-1">
-						<Box className="bg-background-template py-2 px-6 rounded-full items-center flex-column md:flex-row md:self-start">
-							<Text className="text-typography-white font-normal">
-								Get started by editing
-							</Text>
-							<Text className="text-typography-white font-medium ml-2">
-								./App.tsx
-							</Text>
-						</Box>
-						<Link href={"/tabs/" as Href}>
-							<Box className="bg-background-template py-2 px-6 rounded-full items-center flex-column sm:flex-row md:self-start">
-								<Text className="text-typography-white font-normal text-xs">
-									Explore Tab Navigation did i cook react 19
-									sdk 53
-								</Text>
-							</Box>
-						</Link>
-					</Box>
-					<Box className="flex-1 justify-center items-center h-[20px] w-[300px] lg:h-[160px] lg:w-[400px]">
-						<Logo />
-					</Box>
-
-					<Box className="flex-column md:flex-row">
-						<FeatureCard
-							iconSvg={DocumentData}
-							name="Docs"
-							desc="Find in-depth information about gluestack features and API."
-						/>
-						<FeatureCard
-							iconSvg={LightBulbPerson}
-							name="Learn"
-							desc="Learn about gluestack in an interactive course with quizzes!"
-						/>
-						<FeatureCard
-							iconSvg={Rocket}
-							name="Deploy"
-							desc="Instantly drop your gluestack site to a shareable URL with vercel."
-						/>
-					</Box>
-				</Box>
-			</ScrollView>
-		</Box>
-	);
-}
+export default HomeScreen;

@@ -1,6 +1,6 @@
 /** @format */
 
-import { useClientOnlyValue } from "@/src/components/useClientOnlyValue";
+import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
 import React from "react";
