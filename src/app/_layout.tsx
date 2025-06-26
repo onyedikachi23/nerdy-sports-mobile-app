@@ -1,25 +1,27 @@
 /** @format */
 
-import { useColorScheme } from "react-native";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Box } from "@/components/ui/box";
+
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import {
+	Inter_400Regular,
+	Inter_500Medium,
+	Inter_600SemiBold,
+	Inter_700Bold,
+	useFonts,
+} from "@expo-google-fonts/inter";
 import {
 	DarkTheme,
 	DefaultTheme,
 	ThemeProvider,
 } from "@react-navigation/native";
-import {
-	useFonts,
-	Inter_400Regular,
-	Inter_500Medium,
-	Inter_600SemiBold,
-	Inter_700Bold,
-} from "@expo-google-fonts/inter";
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { useColorScheme } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import "../../global.css";
-import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 
 export {
 	// Catch any errors thrown by the Layout component.
@@ -33,7 +35,6 @@ export {
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 void SplashScreen.preventAutoHideAsync();
-
 export default function RootLayout() {
 	const [loaded, error] = useFonts({
 		Inter_400Regular,
@@ -43,11 +44,10 @@ export default function RootLayout() {
 	});
 
 	// Expo Router uses Error Boundaries to catch errors in the navigation tree.
-	useEffect(() => {
+	React.useEffect(() => {
 		if (error) throw error;
 	}, [error]);
-
-	useEffect(() => {
+	React.useEffect(() => {
 		if (loaded) {
 			void SplashScreen.hideAsync();
 		}
@@ -63,15 +63,20 @@ export default function RootLayout() {
 
 	return <RootLayoutNav />;
 }
-
 function RootLayoutNav() {
 	const colorScheme = useColorScheme();
+	const themeMode = colorScheme === "dark" ? "dark" : "light";
 
 	return (
-		<GluestackUIProvider mode={colorScheme === "dark" ? "dark" : "light"}>
+		<GluestackUIProvider mode={themeMode}>
 			<ThemeProvider
 				value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-				<Slot />
+				<SafeAreaView className="flex-1">
+					<StatusBar style={themeMode} />
+					<Box className="flex-1 bg-background-500">
+						<Slot />
+					</Box>
+				</SafeAreaView>
 			</ThemeProvider>
 		</GluestackUIProvider>
 	);
