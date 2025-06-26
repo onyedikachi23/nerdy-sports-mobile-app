@@ -1,11 +1,16 @@
-// prettier.config.js
-module.exports = {
-  plugins: ["prettier-plugin-tailwindcss"],
-  tailwindConfig: "tailwind.config.js",
-  endOfLine: "auto",
-  bracketSameLine: true,
-  useTabs: true,
-  tabWidth: 4,
-  htmlWhitespaceSensitivity: "strict",
-  insertPragma: true,
+/**
+ * @format
+ * @type {import("prettier").Config}
+ */
+
+const config = {
+	plugins: ["prettier-plugin-tailwindcss"],
+	useTabs: true,
+	tabWidth: 4,
+	endOfLine: "auto",
+	bracketSameLine: true,
+	htmlWhitespaceSensitivity: "strict",
+	insertPragma: true,
 };
+
+export default config;
