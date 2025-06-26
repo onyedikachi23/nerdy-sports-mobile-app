@@ -28,5 +28,7 @@
 		"expo-env.d.ts",
 		"nativewind-env.d.ts"
 	],
-	"exclude": ["src/components/ui/**/*"]
+	"exclude": [
+		"src/components/ui/**/*" // managed by gluestack-ui
+	]
 }
