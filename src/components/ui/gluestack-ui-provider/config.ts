@@ -5,12 +5,12 @@ import { vars } from "nativewind";
 
 export const config = {
 	light: vars({
-		// Primary - Lime theme for light mode
+		// Primary - Lime shades
 		"--color-primary-0": "247 254 231", // lime-50
 		"--color-primary-50": "236 252 203", // lime-100
 		"--color-primary-100": "217 249 157", // lime-200
 		"--color-primary-200": "190 242 100", // lime-300
-		"--color-primary-300": "163 230 53", // lime-400 - main brand color
+		"--color-primary-300": "163 230 53", // lime-400
 		"--color-primary-400": "132 204 22", // lime-500
 		"--color-primary-500": "101 163 13", // lime-600
 		"--color-primary-600": "77 124 15", // lime-700
@@ -19,7 +19,7 @@ export const config = {
 		"--color-primary-900": "26 46 5", // lime-950
 		"--color-primary-950": "20 35 4",
 
-		// Secondary - Blue theme for light mode
+		// Secondary - Blue shades
 		"--color-secondary-0": "239 246 255", // blue-50
 		"--color-secondary-50": "219 234 254", // blue-100
 		"--color-secondary-100": "191 219 254", // blue-200
@@ -27,7 +27,7 @@ export const config = {
 		"--color-secondary-300": "96 165 250", // blue-400
 		"--color-secondary-400": "59 130 246", // blue-500
 		"--color-secondary-500": "37 99 235", // blue-600
-		"--color-secondary-600": "29 78 216", // blue-700 - secondary brand color
+		"--color-secondary-600": "29 78 216", // blue-700
 		"--color-secondary-700": "30 64 175", // blue-800
 		"--color-secondary-800": "30 58 138", // blue-900
 		"--color-secondary-900": "23 37 84", // blue-950
@@ -158,33 +158,33 @@ export const config = {
 		"--color-indicator-error": "185 28 28",
 	}),
 	dark: vars({
-		// Primary - Dark lime theme (darker, muted greens)
-		"--color-primary-0": "20 35 4", // darkest
-		"--color-primary-50": "26 46 5",
-		"--color-primary-100": "54 83 20",
-		"--color-primary-200": "63 98 18",
-		"--color-primary-300": "77 124 15",
-		"--color-primary-400": "101 163 13",
-		"--color-primary-500": "132 204 22", // main accent in dark mode
-		"--color-primary-600": "163 230 53",
-		"--color-primary-700": "190 242 100",
-		"--color-primary-800": "217 249 157",
-		"--color-primary-900": "236 252 203",
-		"--color-primary-950": "247 254 231", // lightest
+		// Primary - Blue shades
+		"--color-primary-0": "10 20 50", // blue-950
+		"--color-primary-50": "15 30 75", // blue-900
+		"--color-primary-100": "20 40 100", // blue-800
+		"--color-primary-200": "25 50 125", // blue-700
+		"--color-primary-300": "30 60 150", // blue-600
+		"--color-primary-400": "40 70 175", // blue-500
+		"--color-primary-500": "50 80 200", // blue-400
+		"--color-primary-600": "70 100 220", // blue-300
+		"--color-primary-700": "90 120 230", // blue-200
+		"--color-primary-800": "110 140 240", // blue-100
+		"--color-primary-900": "130 160 250", // blue-50
+		"--color-primary-950": "150 180 255", // blue-0
 
-		// Secondary - Dark blue theme (lighter blues for contrast)
-		"--color-secondary-0": "15 23 42", // darkest
-		"--color-secondary-50": "23 37 84",
-		"--color-secondary-100": "30 58 138",
-		"--color-secondary-200": "30 64 175",
-		"--color-secondary-300": "29 78 216",
-		"--color-secondary-400": "37 99 235",
-		"--color-secondary-500": "59 130 246", // main secondary in dark mode
-		"--color-secondary-600": "96 165 250",
-		"--color-secondary-700": "147 197 253",
-		"--color-secondary-800": "191 219 254",
-		"--color-secondary-900": "219 234 254",
-		"--color-secondary-950": "239 246 255", // lightest
+		// Secondary - Chartreuse Green shades
+		"--color-secondary-0": "30 50 10", // chartreuse-950
+		"--color-secondary-50": "50 80 15", // chartreuse-900
+		"--color-secondary-100": "70 110 20", // chartreuse-800
+		"--color-secondary-200": "90 140 25", // chartreuse-700
+		"--color-secondary-300": "110 170 30", // chartreuse-600
+		"--color-secondary-400": "140 180 30", // chartreuse-500
+		"--color-secondary-500": "170 200 40", // chartreuse-400
+		"--color-secondary-600": "190 220 50", // chartreuse-300
+		"--color-secondary-700": "210 240 60", // chartreuse-200
+		"--color-secondary-800": "220 245 80", // chartreuse-100
+		"--color-secondary-900": "230 250 100", // chartreuse-50
+		"--color-secondary-950": "250 255 120", // chartreuse-0
 
 		/* Tertiary */
 		"--color-tertiary-0": "84 49 18",
@@ -233,7 +233,7 @@ export const config = {
 		"--color-warning-50": "108 56 19",
 		"--color-warning-100": "130 68 23",
 		"--color-warning-200": "180 90 26",
-		"--color-warning-300": "215 108 31",
+		"--color-warning-300": "215 117 31",
 		"--color-warning-400": "231 120 40",
 		"--color-warning-500": "251 149 75",
 		"--color-warning-600": "253 173 116",
