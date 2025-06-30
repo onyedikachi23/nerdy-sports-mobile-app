@@ -292,18 +292,18 @@ const darkThemeMap = {
 	"--color-outline-950": "253 254 254", // gray-950 #FDFEFE
 
 	/* Background - Blue-black shades */
-	"--color-background-0": "125 125 140", // shade-0 #7D7D8C
-	"--color-background-50": "110 110 125", // shade-50 #6E6E7D
-	"--color-background-100": "95 95 110", // shade-100 #5F5F6E
-	"--color-background-200": "80 80 95", // shade-200 #50505F
-	"--color-background-300": "65 65 80", // shade-300 #414150
-	"--color-background-400": "50 50 65", // shade-400 #323241
-	"--color-background-500": "38 38 50", // shade-500 #262632
-	"--color-background-600": "28 28 38", // shade-600 #1C1C26
-	"--color-background-700": "20 20 28", // shade-700 #14141C
-	"--color-background-800": "15 15 20", // shade-800 #0F0F14
-	"--color-background-900": "10 10 15", // shade-900 #0A0A0F
-	"--color-background-950": "05 05 10", // shade-950 #05050A
+	"--color-background-0": "237 242 248", // deep-blue-0 #EDF2F8
+	"--color-background-50": "218 226 237", // deep-blue-50 #DAE2ED
+	"--color-background-100": "188 200 216", // deep-blue-100 #BCC8D8
+	"--color-background-200": "150 163 185", // deep-blue-200 #96A3B9
+	"--color-background-300": "115 127 150", // deep-blue-300 #737F96
+	"--color-background-400": "85 96 115", // deep-blue-400 #556073
+	"--color-background-500": "61 70 87", // deep-blue-500 #3D4657
+	"--color-background-600": "42 49 62", // deep-blue-600 #2A313E
+	"--color-background-700": "28 34 44", // deep-blue-700 #1C222C
+	"--color-background-800": "18 22 29", // deep-blue-800 #12161D
+	"--color-background-900": "10 13 17", // deep-blue-900 #0A0D11
+	"--color-background-950": "3 5 8", // deep-blue-950 #030508
 
 	/* Background Special - Muted shades for specific dark areas */
 	"--color-background-error": "90 75 75", // bg-error #5A4B4B
