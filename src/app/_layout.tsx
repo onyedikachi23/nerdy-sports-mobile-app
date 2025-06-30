@@ -2,7 +2,13 @@
 
 import { Box } from "@/components/ui/box";
 
+/** @format */
+
+/** @format */
+
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import { useSystemColorScheme } from "@/hooks/use-color-scheme";
+import { useThemedColor } from "@/hooks/use-themed-color";
 import {
 	Inter_400Regular,
 	Inter_500Medium,
@@ -17,10 +23,12 @@ import {
 } from "@react-navigation/native";
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { useColorScheme } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
+import {
+	SafeAreaView,
+	useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import "../../global.css";
 
 export {
@@ -35,6 +43,7 @@ export {
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 void SplashScreen.preventAutoHideAsync();
+
 export default function RootLayout() {
 	const [loaded, error] = useFonts({
 		Inter_400Regular,
@@ -53,29 +62,46 @@ export default function RootLayout() {
 		}
 	}, [loaded]);
 
-	// useLayoutEffect(() => {
-	//   setStyleLoaded(true);
-	// }, [styleLoaded]);
-
-	// if (!loaded || !styleLoaded) {
-	//   return null;
-	// }
-
 	return <RootLayoutNav />;
 }
-function RootLayoutNav() {
-	const colorScheme = useColorScheme();
-	const themeMode = colorScheme === "dark" ? "dark" : "light";
+
+const SYSTEM_BARS_BG_COLOR = "background-900";
+
+const NavigationBarBackground = () => {
+	const insets = useSafeAreaInsets();
+	const navigationBarHeight = insets.bottom;
+	const { getHexColor } = useThemedColor();
 
 	return (
-		<GluestackUIProvider mode={themeMode}>
-			<ThemeProvider
-				value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-				<SafeAreaView className="flex-1">
-					<StatusBar style={themeMode} />
-					<Box className="flex-1 bg-background-500">
-						<Slot />
-					</Box>
+		<Box
+			style={{
+				height: navigationBarHeight,
+				backgroundColor: getHexColor(SYSTEM_BARS_BG_COLOR),
+			}}
+		/>
+	);
+};
+
+function RootLayoutNav() {
+	const colorScheme = useSystemColorScheme();
+	const isDarkMode = colorScheme === "dark";
+	const { getHexColor } = useThemedColor();
+	return (
+		<GluestackUIProvider mode={colorScheme}>
+			<ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
+				<SafeAreaView
+					edges={["top", "left", "right"]}
+					className="flex-1 bg-brand-background">
+					{/* Didn't use Expo StatusBar cause it just never works */}
+					<StatusBar
+						animated
+						barStyle={isDarkMode ? "light-content" : "dark-content"}
+						backgroundColor={getHexColor(SYSTEM_BARS_BG_COLOR)}
+					/>
+
+					<Slot />
+
+					<NavigationBarBackground />
 				</SafeAreaView>
 			</ThemeProvider>
 		</GluestackUIProvider>
