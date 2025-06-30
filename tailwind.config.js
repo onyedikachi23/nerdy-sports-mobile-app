@@ -16,6 +16,21 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				"brand-primary": "rgb(var(--color-primary-500)/<alpha-value>)",
+				"brand-secondary":
+					"rgb(var(--color-secondary-500)/<alpha-value>)",
+				"brand-tertiary":
+					"rgb(var(--color-tertiary-500)/<alpha-value>)",
+				"brand-error": "rgb(var(--color-error-500)/<alpha-value>)",
+				"brand-success": "rgb(var(--color-success-500)/<alpha-value>)",
+				"brand-warning": "rgb(var(--color-warning-500)/<alpha-value>)",
+				"brand-info": "rgb(var(--color-info-500)/<alpha-value>)",
+				"brand-outline": "rgb(var(--color-outline-500)/<alpha-value>)",
+				"brand-typography":
+					"rgb(var(--color-typography-500)/<alpha-value>)",
+				"brand-background":
+					"rgb(var(--color-background-800)/<alpha-value>)",
+
 				primary: {
 					0: "rgb(var(--color-primary-0)/<alpha-value>)",
 					50: "rgb(var(--color-primary-50)/<alpha-value>)",
