@@ -1,110 +1,96 @@
 /** @format */
 
-import {
-	Button,
-	ButtonText,
-	ButtonSpinner,
-	ButtonIcon,
-} from "@/components/ui/button";
+import { Button, ButtonText } from "@/components/ui/button";
 
 /** @format */
 
-import { Bell, Search, TrendingUp, Users } from "lucide-react-native";
+import { Text } from "@/components/ui/text";
+
+/** @format */
+
+import { Heading } from "@/components/ui/heading";
+
+/** @format */
+
+import { Box } from "@/components/ui/box";
+
+/** @format */
+
+/** @format */
+
+import { Image } from "@/components/ui/image";
+
+/** @format */
+
+import { BoxScreen } from "@/components/ui-extended/box";
+import { LinearGradient } from "@/components/ui/linear-gradient";
+import { useThemedColor } from "@/hooks/use-themed-color";
 import type React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-const HomeScreen: React.FC = () => {
+
+export default function HomeScreen() {
+	const { getHexColor } = useThemedColor();
 	return (
-		<SafeAreaView className="flex-1 bg-background-0">
-			<View className="flex-1 px-6 pt-8">
-				{/* Header */}
-				<View className="mb-8 flex flex-row items-center justify-between">
-					<View>
-						<Text className="flex text-lg text-primary-500">
-							NerdySports
-						</Text>
-						<Text className="mt-1 text-error-500">
-							Welcome back!
-						</Text>
-					</View>
-					<View className="relative">
-						<Bell size={24} color="rgb(163 163 163)" />
-						<View className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-success-500" />
-					</View>
-				</View>
+		<LinearGradient
+			colors={[
+				getHexColor("primary-600"),
+				getHexColor("primary-700"),
+				getHexColor("primary-900"),
+			]}
+			start={[0.5, 0]} // Top-center
+			end={[0.5, 1]} // Bottom-center
+			className="flex-1">
+			<BoxScreen className="relative bg-transparent">
+				<Image
+					size="full"
+					className="rounded-2xl object-cover"
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+					source={require("@/assets/images/footballers-on-field.webp")}
+					alt="Hero banner"
+				/>
 
-				{/* Search */}
-				<View className="mb-8 flex-row items-center rounded-xl bg-secondary-100 px-4 py-3">
-					<Search size={20} color="rgb(140 140 140)" />
-					<Text className="ml-3 flex-1 text-typography-400">
-						Search players, teams...
-					</Text>
-				</View>
+				<Box className="relative">
+					<Box className="absolute bottom-4 left-0 p-2">
+						<Box className="gap-8 rounded-2xl bg-background-600/50 p-4">
+							{/* Hero section */}
+							<Box className="gap-6">
+								<Box className="gap-3">
+									<Text size="2xl">Welcome to</Text>
+									<Heading
+										size="4xl"
+										className="text-secondary-300">
+										Nerdy Sports.
+									</Heading>
+								</Box>
 
-				{/* Stats Cards */}
-				<View className="mb-8 flex-row justify-between">
-					<View className="mr-3 flex-1 rounded-xl bg-secondary-500 p-4 text-sm shadow-sm">
-						<View className="flex-row items-center justify-between">
-							<View>
-								<Text className="text-2xl font-bold text-typography-950">
-									2.8K
+								<Text size="xs">
+									Grow your sports career with us, and also
+									keep the bond with your supporters!
 								</Text>
-								<Text className="text-sm text-typography-500">
-									Players
-								</Text>
-							</View>
-							<View className="rounded-lg bg-info-500 p-2">
-								<Users size={20} color="white" />
-							</View>
-						</View>
-					</View>
+							</Box>
 
-					<View className="ml-3 flex-1 rounded-xl bg-secondary-100 p-4">
-						<View className="flex-row items-center justify-between">
-							<View>
-								<Text className="text-2xl font-bold text-typography-950">
-									156
-								</Text>
-								<Text className="text-blue-400">Scouts</Text>
-							</View>
-							<View className="rounded-lg bg-success-500 p-2">
-								<TrendingUp size={20} color="white" />
-							</View>
-						</View>
-					</View>
-				</View>
-
-				{/* Quick Actions */}
-				<View className="space-y-4">
-					<Text>Maybe</Text>
-					<TouchableOpacity className="rounded-xl bg-white px-6 py-4">
-						<Text className="bg-white text-center text-3xl font-semibold text-typography-0">
-							Scout New Talent
-						</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity className="rounded-xl border border-outline-300 bg-secondary-100 px-6 py-4">
-						<Text className="text-center text-4xl font-semibold text-typography-950">
-							Browse Teams
-						</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity className="rounded-xl border border-outline-300 bg-secondary-100 px-6 py-4">
-						<Text className="text-center text-lg font-semibold text-typography-950">
-							View Live Games
-						</Text>
-					</TouchableOpacity>
-				</View>
-
-				<Button
-					action={"primary"}
-					variant={"solid"}
-					size={"lg"}
-					isDisabled={false}>
-					<ButtonText>Hello World</ButtonText>
-				</Button>
-			</View>
-		</SafeAreaView>
+							{/* Action buttons */}
+							<Box className="gap-4">
+								<Button
+									action={"secondary"}
+									variant={"solid"}
+									size={"xl"}
+									className="rounded-full">
+									<ButtonText>Join now!</ButtonText>
+								</Button>
+								<Button
+									action={"primary"}
+									variant={"solid"}
+									size={"xl"}
+									className="rounded-full">
+									<ButtonText action="secondary">
+										Log in
+									</ButtonText>
+								</Button>
+							</Box>
+						</Box>
+					</Box>
+				</Box>
+			</BoxScreen>
+		</LinearGradient>
 	);
-};
-export default HomeScreen;
+}
