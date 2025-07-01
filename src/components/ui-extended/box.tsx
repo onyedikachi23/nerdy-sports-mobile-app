@@ -16,10 +16,7 @@ const BoxScreen: React.FC<BoxScreenProps> = ({
 	return (
 		<Comp
 			{...props}
-			className={cn(
-				"flex-1 bg-brand-background px-8 pb-10 pt-5",
-				className,
-			)}
+			className={cn("flex-1 gap-4 bg-brand-background p-8", className)}
 		/>
 	);
 };
