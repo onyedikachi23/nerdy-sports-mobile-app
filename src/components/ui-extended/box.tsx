@@ -6,10 +6,14 @@ import { cn } from "@/lib/utils";
 import { type AsChildProps, PropSlot } from "./slot";
 import { StyleSheet } from "react-native";
 
-type BoxScreenProps = AsChildProps<React.ComponentProps<typeof Box>>;
+type BoxProps = React.ComponentProps<typeof Box>;
+
+const BoxSlot = PropSlot as React.FC<BoxProps>;
 
 /**The padding value used in `style.padding` for {@link BoxScreen} */
 const BOX_SCREEN_PADDING = 28;
+
+type BoxScreenProps = AsChildProps<BoxProps>;
 
 const BoxScreen: React.FC<BoxScreenProps> = ({
 	className,
@@ -17,7 +21,7 @@ const BoxScreen: React.FC<BoxScreenProps> = ({
 	asChild,
 	...props
 }) => {
-	const Comp = asChild ? PropSlot : Box;
+	const Comp = asChild ? BoxSlot : Box;
 	return (
 		<Comp
 			{...props}
@@ -32,5 +36,5 @@ const BoxScreen: React.FC<BoxScreenProps> = ({
 	);
 };
 
-export { BoxScreen, BOX_SCREEN_PADDING };
+export { BoxSlot, BoxScreen, BOX_SCREEN_PADDING };
 export type { BoxScreenProps };
