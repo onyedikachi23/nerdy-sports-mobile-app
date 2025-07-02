@@ -31,9 +31,13 @@ import { useThemedColor } from "@/hooks/use-themed-color";
 import { Link } from "expo-router";
 import type React from "react";
 
-const AuthButton: typeof ExternalAuthButton = ({ authAction, children }) => (
+const AuthButton: typeof ExternalAuthButton = ({
+	authAction,
+	children,
+	...props
+}) => (
 	<Link href={`/${authAction}`} asChild>
-		<ExternalAuthButton authAction={authAction}>
+		<ExternalAuthButton {...props} authAction={authAction}>
 			{children}
 		</ExternalAuthButton>
 	</Link>
@@ -85,7 +89,9 @@ export default function HomeScreen() {
 								<AuthButton authAction="signup">
 									Join now!
 								</AuthButton>
-								<AuthButton authAction="login">
+								<AuthButton
+									className="border"
+									authAction="login">
 									Log in
 								</AuthButton>
 							</ButtonGroup>
