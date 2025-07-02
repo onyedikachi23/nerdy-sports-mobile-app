@@ -66,7 +66,7 @@ export default function HomeScreen() {
 
 				<Box className="relative">
 					<Box className="absolute bottom-4 left-0 p-2">
-						<Box className="gap-8 rounded-2xl bg-background-600/50 p-4">
+						<Box className="gap-8 rounded-2xl bg-background-900/50 p-4">
 							{/* Hero section */}
 							<Box className="gap-6">
 								<Box className="gap-3">
@@ -78,7 +78,7 @@ export default function HomeScreen() {
 									</Heading>
 								</Box>
 
-								<Text size="xs">
+								<Text size="sm">
 									Grow your sports career with us, and also
 									keep the bond with your supporters!
 								</Text>
@@ -89,9 +89,7 @@ export default function HomeScreen() {
 								<AuthButton authAction="signup">
 									Join now!
 								</AuthButton>
-								<AuthButton
-									className="border"
-									authAction="login">
+								<AuthButton authAction="login">
 									Log in
 								</AuthButton>
 							</ButtonGroup>
