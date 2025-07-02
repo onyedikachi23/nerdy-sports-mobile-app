@@ -1,6 +1,8 @@
 /** @format */
 
-import { Button, ButtonText } from "@/components/ui/button";
+/** @format */
+
+import { ButtonGroup } from "@/components/ui/button";
 
 /** @format */
 
@@ -22,24 +24,34 @@ import { Image } from "@/components/ui/image";
 
 /** @format */
 
+import { AuthButton as ExternalAuthButton } from "@/components/app/auth/auth-button";
 import { BoxScreen } from "@/components/ui-extended/box";
 import { LinearGradient } from "@/components/ui/linear-gradient";
 import { useThemedColor } from "@/hooks/use-themed-color";
+import { Link } from "expo-router";
 import type React from "react";
+
+const AuthButton: typeof ExternalAuthButton = ({ authAction, children }) => (
+	<Link href={`/${authAction}`} asChild>
+		<ExternalAuthButton authAction={authAction}>
+			{children}
+		</ExternalAuthButton>
+	</Link>
+);
 
 export default function HomeScreen() {
 	const { getHexColor } = useThemedColor();
 	return (
-		<LinearGradient
-			colors={[
-				getHexColor("primary-600"),
-				getHexColor("primary-700"),
-				getHexColor("primary-900"),
-			]}
-			start={[0.5, 0]} // Top-center
-			end={[0.5, 1]} // Bottom-center
-			className="flex-1">
-			<BoxScreen className="relative bg-transparent">
+		<BoxScreen className="relative bg-transparent" asChild>
+			<LinearGradient
+				colors={[
+					getHexColor("primary-600"),
+					getHexColor("primary-700"),
+					getHexColor("primary-900"),
+				]}
+				start={[0.5, 0]} // Top-center
+				end={[0.5, 1]} // Bottom-center
+			>
 				<Image
 					size="full"
 					className="rounded-2xl object-cover"
@@ -69,28 +81,18 @@ export default function HomeScreen() {
 							</Box>
 
 							{/* Action buttons */}
-							<Box className="gap-4">
-								<Button
-									action={"secondary"}
-									variant={"solid"}
-									size={"xl"}
-									className="rounded-full">
-									<ButtonText>Join now!</ButtonText>
-								</Button>
-								<Button
-									action={"primary"}
-									variant={"solid"}
-									size={"xl"}
-									className="rounded-full">
-									<ButtonText action="secondary">
-										Log in
-									</ButtonText>
-								</Button>
-							</Box>
+							<ButtonGroup>
+								<AuthButton authAction="signup">
+									Join now!
+								</AuthButton>
+								<AuthButton authAction="login">
+									Log in
+								</AuthButton>
+							</ButtonGroup>
 						</Box>
 					</Box>
 				</Box>
-			</BoxScreen>
-		</LinearGradient>
+			</LinearGradient>
+		</BoxScreen>
 	);
 }
