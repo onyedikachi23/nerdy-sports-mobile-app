@@ -1,6 +1,9 @@
 /** @format */
 
-import { useThemedColor, type ThemeColorName } from "@/hooks/use-themed-color";
+import {
+	useThemedColor,
+	type ThemedColorReference,
+} from "@/hooks/use-themed-color";
 import React from "react";
 import {
 	LinearGradient,
@@ -8,9 +11,9 @@ import {
 } from "../ui/linear-gradient";
 
 type ThemedLinearGradientColors = readonly [
-	ThemeColorName,
-	ThemeColorName,
-	...ThemeColorName[],
+	ThemedColorReference,
+	ThemedColorReference,
+	...ThemedColorReference[],
 ];
 
 type ThemedLinearGradientLocations<
@@ -66,7 +69,7 @@ const ThemedLinearGradient = <
 
 export { ThemedLinearGradient };
 export type {
-	ThemedLinearGradientProps,
 	ThemedLinearGradientColors,
 	ThemedLinearGradientLocations,
+	ThemedLinearGradientProps,
 };
