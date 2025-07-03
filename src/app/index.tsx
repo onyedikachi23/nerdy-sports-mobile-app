@@ -26,8 +26,7 @@ import { Image } from "@/components/ui/image";
 
 import { AuthButton as ExternalAuthButton } from "@/components/app/auth/auth-button";
 import { BoxScreen } from "@/components/ui-extended/box";
-import { LinearGradient } from "@/components/ui/linear-gradient";
-import { useThemedColor } from "@/hooks/use-themed-color";
+import { ThemedLinearGradient } from "@/components/ui-extended/linear-gradient";
 import { Link } from "expo-router";
 import type React from "react";
 
@@ -44,18 +43,10 @@ const AuthButton: typeof ExternalAuthButton = ({
 );
 
 export default function HomeScreen() {
-	const { getHexColor } = useThemedColor();
 	return (
 		<BoxScreen className="relative bg-transparent" asChild>
-			<LinearGradient
-				colors={[
-					getHexColor("primary-600"),
-					getHexColor("primary-700"),
-					getHexColor("primary-900"),
-				]}
-				start={[0.5, 0]} // Top-center
-				end={[0.5, 1]} // Bottom-center
-			>
+			<ThemedLinearGradient
+				colors={["primary-600", "primary-700", "primary-900"]}>
 				<Image
 					size="full"
 					className="rounded-2xl object-cover"
@@ -96,7 +87,7 @@ export default function HomeScreen() {
 						</Box>
 					</Box>
 				</Box>
-			</LinearGradient>
+			</ThemedLinearGradient>
 		</BoxScreen>
 	);
 }
