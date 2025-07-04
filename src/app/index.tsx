@@ -12,17 +12,9 @@ import { Text } from "@/components/ui/text";
 
 import { Heading } from "@/components/ui/heading";
 
-/** @format */
-
 import { Box } from "@/components/ui/box";
 
-/** @format */
-
-/** @format */
-
-import { Image } from "@/components/ui/image";
-
-/** @format */
+import { Image } from "@/components/ui-extended/image";
 
 import { AuthButton as ExternalAuthButton } from "@/components/app/auth/auth-button";
 import { BoxScreen } from "@/components/ui-extended/box";
@@ -48,8 +40,7 @@ export default function HomeScreen() {
 			<ThemedLinearGradient
 				colors={["primary-600", "primary-700", "primary-900"]}>
 				<Image
-					size="full"
-					className="rounded-2xl object-cover"
+					className="size-full rounded-2xl object-cover"
 					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 					source={require("@/assets/images/footballers-on-field.webp")}
 					alt="Hero banner"
