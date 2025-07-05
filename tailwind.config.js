@@ -18,7 +18,7 @@ module.exports = {
 			colors: {
 				"brand-primary": "rgb(var(--color-primary-500)/<alpha-value>)",
 				"brand-secondary":
-					"rgb(var(--color-secondary-500)/<alpha-value>)",
+					"rgb(var(--color-secondary-300)/<alpha-value>)",
 				"brand-tertiary":
 					"rgb(var(--color-tertiary-500)/<alpha-value>)",
 				"brand-error": "rgb(var(--color-error-500)/<alpha-value>)",
