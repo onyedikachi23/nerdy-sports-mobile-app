@@ -29,6 +29,8 @@ import {
 	SafeAreaView,
 	useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import "../../global.css";
 
 export {
@@ -92,16 +94,20 @@ function RootLayoutNav() {
 				<SafeAreaView
 					edges={["top", "left", "right"]}
 					className="flex-1 bg-brand-background">
-					{/* Didn't use Expo StatusBar cause it just never works */}
-					<StatusBar
-						animated
-						barStyle={isDarkMode ? "light-content" : "dark-content"}
-						backgroundColor={getHexColor(SYSTEM_BARS_BG_COLOR)}
-					/>
+					<GestureHandlerRootView>
+						{/* Didn't use Expo StatusBar cause it just won't work */}
+						<StatusBar
+							animated
+							barStyle={
+								isDarkMode ? "light-content" : "dark-content"
+							}
+							backgroundColor={getHexColor(SYSTEM_BARS_BG_COLOR)}
+						/>
 
-					<Slot />
+						<Slot />
 
-					<NavigationBarBackground />
+						<NavigationBarBackground />
+					</GestureHandlerRootView>
 				</SafeAreaView>
 			</ThemeProvider>
 		</GluestackUIProvider>
