@@ -1,15 +1,15 @@
 /** @format */
 
 import js from "@eslint/js";
-import globals from "globals";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
-import react from "eslint-plugin-react";
 import pluginQuery from "@tanstack/eslint-plugin-query";
-import reactQueryKeys from "eslint-plugin-react-query-keys";
-import reactYouMightNotNeedAnEffect from "eslint-plugin-react-you-might-not-need-an-effect";
 import expoConfig from "eslint-config-expo/flat.js";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactQueryKeys from "eslint-plugin-react-query-keys";
+import reactRefresh from "eslint-plugin-react-refresh";
+import reactYouMightNotNeedAnEffect from "eslint-plugin-react-you-might-not-need-an-effect";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
 	{
@@ -62,6 +62,10 @@ export default tseslint.config(
 						{
 							name: "zod",
 							message: `Please use 'zod/v4' instead of the base 'zod' import. Versioning with subpaths ("zod/v4"): https://github.com/colinhacks/zod/issues/4371`,
+						},
+						{
+							name: "zod/v4-mini",
+							message: `Please use 'zod/v4' instead of the 'zod/v4-mini' import. Versioning with subpaths ("zod/v4"): https://github.com/colinhacks/zod/issues/4371`,
 						},
 					],
 				},
