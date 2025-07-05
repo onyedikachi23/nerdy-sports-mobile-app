@@ -36,5 +36,5 @@ const BoxScreen: React.FC<BoxScreenProps> = ({
 	);
 };
 
-export { BoxSlot, BoxScreen, BOX_SCREEN_PADDING };
+export { Box, BoxSlot, BoxScreen, BOX_SCREEN_PADDING };
 export type { BoxScreenProps };
