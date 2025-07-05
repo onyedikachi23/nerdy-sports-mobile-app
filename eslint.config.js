@@ -55,6 +55,17 @@ export default tseslint.config(
 			...react.configs["jsx-runtime"].rules,
 			"react/prop-types": "off",
 			"react-query-keys/no-plain-query-keys": "warn",
+			"no-restricted-imports": [
+				"error",
+				{
+					paths: [
+						{
+							name: "zod",
+							message: `Please use 'zod/v4' instead of the base 'zod' import. Versioning with subpaths ("zod/v4"): https://github.com/colinhacks/zod/issues/4371`,
+						},
+					],
+				},
+			],
 		},
 	},
 );
