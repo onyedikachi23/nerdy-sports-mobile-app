@@ -55,6 +55,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 				placeholder={placeholder}
 				onChangeText={onChange}
 				value={value}
+				returnKeyType="next"
 			/>
 			<InputSlot className="relative p-2">
 				<BlurredGradientBg className="rounded-lg" />
@@ -118,26 +119,44 @@ const FormField: React.FC<FormFieldProps> = ({
 	</FormControl>
 );
 
-interface SubmitButtonProps
-	extends SafeOmit<React.ComponentProps<typeof Button>, "children"> {
-	label: React.ReactNode;
-}
+const { fieldContext, formContext, useFormContext } = createFormHookContexts();
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({
+const SubmitButton: React.FC<React.ComponentProps<typeof Button>> = ({
 	className,
 	size = "xl",
-	label,
+	children,
 	...props
-}) => (
-	<Button
-		{...props}
-		className={cn("h-16 rounded-2xl", className)}
-		size={size}>
-		<ButtonText>{label}</ButtonText>
-	</Button>
-);
+}) => {
+	const form = useFormContext();
+	return (
+		<form.Subscribe
+			selector={({ isSubmitting, canSubmit }) => ({
+				isSubmitting,
+				canSubmit,
+			})}>
+			{({ isSubmitting, canSubmit }) => {
+				const isDisabled = isSubmitting || !canSubmit;
 
-const { fieldContext, formContext } = createFormHookContexts();
+				return (
+					<Button
+						{...props}
+						isDisabled={isDisabled}
+						onPress={() => void form.handleSubmit()}
+						className={cn("h-16 rounded-2xl", className)}
+						size={size}>
+						{(state) => (
+							<ButtonText>
+								{typeof children === "function"
+									? children(state)
+									: children}
+							</ButtonText>
+						)}
+					</Button>
+				);
+			}}
+		</form.Subscribe>
+	);
+};
 
 // Allow us to bind components to the form to keep type safety but reduce production boilerplate
 // Define this once to have a generator of consistent form instances throughout your app
@@ -154,12 +173,11 @@ const { useAppForm } = createFormHook({
 
 const StrongPasswordSchema = z
 	.string()
+	.min(8, "At least 8 characters long")
 	.regex(/[a-z]/, "At least one lowercase letter")
 	.regex(/[A-Z]/, "At least one uppercase letter")
 	.regex(/\d/, "At least one number")
-	.regex(/[^a-zA-Z0-9\s]/, "At least one special character")
-	.min(8, "At least 8 characters long");
-
+	.regex(/[^a-zA-Z0-9\s]/, "At least one special character");
 const formSchema = z
 	.object({
 		name: z.string().min(3, "Should be more than 3 characters long"),
@@ -263,12 +281,15 @@ export default function SignupRoute() {
 				</form.AppField>
 
 				<ButtonGroup className="my-4">
-					<Button
-						action="secondary"
-						className="h-16 rounded-2xl"
-						size="xl">
-						<ButtonText>Sign up</ButtonText>
-					</Button>
+					<form.AppForm>
+						<form.SubmitButton
+							action="secondary"
+							className="h-16 rounded-2xl"
+							size="xl">
+							Sign up
+						</form.SubmitButton>
+					</form.AppForm>
+
 					<Button
 						className="flex h-16 justify-center rounded-2xl bg-background-900 data-[active=true]:bg-background-700"
 						size="xl">
