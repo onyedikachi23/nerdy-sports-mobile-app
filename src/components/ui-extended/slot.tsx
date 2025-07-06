@@ -1,7 +1,7 @@
 /** @format */
 
 import { cn } from "@/lib/utils";
-import { checkIsObject } from "@/lib/utils/type-guards";
+import { isObject } from "@/lib/utils/type-guards";
 import React from "react";
 import { StyleSheet } from "react-native";
 
@@ -11,8 +11,7 @@ interface PropSlotProps extends Record<string, unknown> {
 
 const checkHasClassNameProp = (
 	value: unknown,
-): value is { className?: string } =>
-	checkIsObject(value) && "className" in value;
+): value is { className?: string } => isObject(value) && "className" in value;
 
 const PropSlot: React.FC<PropSlotProps> = ({ children, ...slotProps }) => {
 	const singleChild = React.Children.only(children);
@@ -23,12 +22,10 @@ const PropSlot: React.FC<PropSlotProps> = ({ children, ...slotProps }) => {
 		);
 	}
 
-	const childProps = checkIsObject(singleChild.props)
-		? singleChild.props
-		: {};
+	const childProps = isObject(singleChild.props) ? singleChild.props : {};
 
 	const childStyle =
-		"style" in childProps && checkIsObject(childProps.style)
+		"style" in childProps && isObject(childProps.style)
 			? childProps.style
 			: undefined;
 	const childClassName = checkHasClassNameProp(childProps)
@@ -36,7 +33,7 @@ const PropSlot: React.FC<PropSlotProps> = ({ children, ...slotProps }) => {
 		: undefined;
 
 	const slotStyle =
-		"style" in slotProps && checkIsObject(slotProps.style)
+		"style" in slotProps && isObject(slotProps.style)
 			? slotProps.style
 			: undefined;
 	const slotClassName = checkHasClassNameProp(slotProps)
