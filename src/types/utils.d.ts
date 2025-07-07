@@ -44,9 +44,38 @@ type SafeExtract<T, U extends T> = Extract<T, U>;
 type SafeExclude<T, U extends T> = Exclude<T, U>;
 
 /**
- * A type-safe version of Omit that ensures K can only be keys of T.
+ * Distributes the `Omit` utility type over a union.
+ * This means if `T` is a union (`A | B`), `DistributedOmit<T, K>`
+ * will apply `Omit` to each member of the union individually
+ * (`Omit<A, K> | Omit<B, K>`).
+ *
+ * @see {@link https://github.com/microsoft/TypeScript/issues/49659#issuecomment-1164773544 Omit on a discriminating union with intersection}
  */
-type SafeOmit<T, K extends keyof T> = Omit<T, K>;
+type DistributedOmit<T, K extends keyof never> = T extends unknown
+	? Omit<T, K>
+	: never;
+
+/**
+ * A type-safe version of {@link DistributedOmit} that ensures K can only be keys of T.
+ */
+type SafeOmit<T, K extends keyof T> = DistributedOmit<T, K>;
+
+/**
+ * Distributes the `Pick` utility type over a union.
+ * This means if `T` is a union (`A | B`), `DistributedPick<T, K>`
+ * will apply `Pick` to each member of the union individually
+ * (`Pick<A, K> | Pick<B, K>`).
+ *
+ * @see {@link DistributedOmit}
+ */
+type DistributedPick<T, K extends keyof never> = T extends unknown
+	? Pick<T, K>
+	: never;
+
+/**
+ * An alias for {@link DistributedPick}.
+ */
+type SafePick<T, K extends keyof T> = DistributedPick<T, K>;
 
 /**Turns a complex intersection of objects into a clean object type */
 type Prettify<T> = {
