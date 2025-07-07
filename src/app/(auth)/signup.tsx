@@ -5,171 +5,20 @@ import { Heading } from "@/components/ui/heading";
 
 /** @format */
 
-import { BlurredGradientBg } from "@/components/app/auth/blurred-gradient-bg";
+import {
+	FormField,
+	type FormFieldBuilder,
+} from "@/components/app/auth/form-field";
+import { SubmitButton } from "@/components/app/auth/submit-button";
 import { Image } from "@/components/ui-extended/image";
 import { Button, ButtonGroup, ButtonText } from "@/components/ui/button";
-import {
-	FormControl,
-	FormControlError,
-	FormControlErrorIcon,
-	FormControlErrorText,
-	FormControlHelper,
-	FormControlHelperText,
-	FormControlLabel,
-	FormControlLabelText,
-} from "@/components/ui/form-control";
-import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { useForm } from "@tanstack/react-form";
 import { Link } from "expo-router";
-import {
-	AlertCircleIcon,
-	EyeOff,
-	Mail,
-	UserRound,
-	type LucideIcon,
-} from "lucide-react-native";
+import { Mail, UserRound } from "lucide-react-native";
 import React from "react";
-import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 import { z } from "zod/v4";
-import { cn } from "@/lib/utils";
-
-interface InputWithIconProps {
-	icon: LucideIcon;
-	placeholder: string;
-	onChange?: (text: string) => void;
-	value?: string;
-}
-
-const InputWithIcon: React.FC<InputWithIconProps> = ({
-	icon,
-	placeholder,
-	onChange,
-	value,
-}) => {
-	return (
-		<Input
-			variant="rounded"
-			className="h-auto rounded-2xl bg-background-900 px-4 py-2">
-			<InputField
-				placeholder={placeholder}
-				onChangeText={onChange}
-				value={value}
-				returnKeyType="next"
-			/>
-			<InputSlot className="relative p-2">
-				<BlurredGradientBg className="rounded-lg" />
-				<InputIcon as={icon} />
-			</InputSlot>
-		</Input>
-	);
-};
-
-interface FormFieldProps
-	extends SafeOmit<
-		Merge<
-			React.ComponentProps<typeof FormControl>,
-			RequireKeys<InputWithIconProps, "onChange" | "value">
-		>,
-		"isInvalid"
-	> {
-	label: React.ReactNode;
-	helperText?: React.ReactNode;
-	isValid: boolean;
-	errorText: string | undefined;
-}
-
-const FormField: React.FC<FormFieldProps> = ({
-	icon,
-	label,
-	helperText,
-	errorText,
-	placeholder,
-	onChange,
-	value,
-	isValid,
-}) => (
-	<FormControl
-		isInvalid={!isValid}
-		size="md"
-		isDisabled={false}
-		isReadOnly={false}
-		isRequired={true}>
-		<FormControlLabel>
-			<FormControlLabelText className="capitalize">
-				{label}
-			</FormControlLabelText>
-		</FormControlLabel>
-		<InputWithIcon
-			icon={icon}
-			placeholder={placeholder}
-			onChange={onChange}
-			value={value}
-		/>
-		{helperText && (
-			<FormControlHelper>
-				<FormControlHelperText>{helperText}</FormControlHelperText>
-			</FormControlHelper>
-		)}
-
-		<FormControlError className="items-start">
-			<FormControlErrorIcon as={AlertCircleIcon} />
-			<FormControlErrorText>{errorText}</FormControlErrorText>
-		</FormControlError>
-	</FormControl>
-);
-
-const { fieldContext, formContext, useFormContext } = createFormHookContexts();
-
-const SubmitButton: React.FC<React.ComponentProps<typeof Button>> = ({
-	className,
-	size = "xl",
-	children,
-	...props
-}) => {
-	const form = useFormContext();
-	return (
-		<form.Subscribe
-			selector={({ isSubmitting, canSubmit }) => ({
-				isSubmitting,
-				canSubmit,
-			})}>
-			{({ isSubmitting, canSubmit }) => {
-				const isDisabled = isSubmitting || !canSubmit;
-
-				return (
-					<Button
-						{...props}
-						isDisabled={isDisabled}
-						onPress={() => void form.handleSubmit()}
-						className={cn("h-16 rounded-2xl", className)}
-						size={size}>
-						{(state) => (
-							<ButtonText>
-								{typeof children === "function"
-									? children(state)
-									: children}
-							</ButtonText>
-						)}
-					</Button>
-				);
-			}}
-		</form.Subscribe>
-	);
-};
-
-// Allow us to bind components to the form to keep type safety but reduce production boilerplate
-// Define this once to have a generator of consistent form instances throughout your app
-const { useAppForm } = createFormHook({
-	fieldComponents: {
-		FormField,
-	},
-	formComponents: {
-		SubmitButton,
-	},
-	fieldContext,
-	formContext,
-});
 
 const StrongPasswordSchema = z
 	.string()
@@ -192,8 +41,35 @@ const formSchema = z
 
 type SignupForm = z.infer<typeof formSchema>;
 
+const fieldsBuilder = [
+	{
+		name: "name",
+		label: "Full name",
+		icon: UserRound,
+		placeholder: "Enter full name",
+	},
+	{
+		name: "email",
+		label: "Email",
+		icon: Mail,
+		placeholder: "Enter email address",
+	},
+	{
+		name: "password",
+		label: "Password",
+		type: "password",
+		placeholder: "Enter password",
+	},
+	{
+		name: "confirmPassword",
+		label: "Confirm password",
+		type: "password",
+		placeholder: "Enter password again",
+	},
+] satisfies FormFieldBuilder<SignupForm>[];
+
 export default function SignupRoute() {
-	const form = useAppForm({
+	const form = useForm({
 		defaultValues: {
 			name: "",
 			email: "",
@@ -224,71 +100,20 @@ export default function SignupRoute() {
 			</Text>
 
 			<VStack space="xl">
-				<form.AppField name="name">
-					{({ FormField, handleChange, state }) => (
-						<FormField
-							isValid={state.meta.isValid}
-							errorText={state.meta.errors[0]?.message}
-							value={state.value}
-							onChange={handleChange}
-							label="full name"
-							icon={UserRound}
-							placeholder="Enter full name"
-						/>
-					)}
-				</form.AppField>
-
-				<form.AppField name="email">
-					{({ FormField, handleChange, state }) => (
-						<FormField
-							isValid={state.meta.isValid}
-							errorText={state.meta.errors[0]?.message}
-							value={state.value}
-							onChange={handleChange}
-							label="email"
-							icon={Mail}
-							placeholder="Enter email address"
-						/>
-					)}
-				</form.AppField>
-
-				<form.AppField name="password">
-					{({ FormField, handleChange, state }) => (
-						<FormField
-							isValid={state.meta.isValid}
-							errorText={state.meta.errors[0]?.message}
-							value={state.value}
-							onChange={handleChange}
-							label="password"
-							icon={EyeOff}
-							placeholder="Enter password"
-						/>
-					)}
-				</form.AppField>
-
-				<form.AppField name="confirmPassword">
-					{({ FormField, handleChange, state }) => (
-						<FormField
-							isValid={state.meta.isValid}
-							errorText={state.meta.errors[0]?.message}
-							value={state.value}
-							onChange={handleChange}
-							label="confirm password"
-							icon={EyeOff}
-							placeholder="Enter password again"
-						/>
-					)}
-				</form.AppField>
+				{fieldsBuilder.map(({ name, ...props }) => (
+					<form.Field key={name} name={name}>
+						{(field) => <FormField {...props} field={field} />}
+					</form.Field>
+				))}
 
 				<ButtonGroup className="my-4">
-					<form.AppForm>
-						<form.SubmitButton
-							action="secondary"
-							className="h-16 rounded-2xl"
-							size="xl">
-							Sign up
-						</form.SubmitButton>
-					</form.AppForm>
+					<SubmitButton
+						form={form}
+						action="secondary"
+						className="h-16 rounded-2xl"
+						size="xl">
+						Sign up
+					</SubmitButton>
 
 					<Button
 						className="flex h-16 justify-center rounded-2xl bg-background-900 data-[active=true]:bg-background-700"
