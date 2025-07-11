@@ -123,3 +123,12 @@ type Mutable<T> = {
 type NonNullableValues<T> = {
 	[K in keyof T]: NonNullable<T[K]>;
 };
+
+/**
+ * Asserts that type `U` is a subtype of type `T`.
+ *
+ * If `U` is a subtype of `T`, it returns `U`; otherwise, it returns `never`.
+ *
+ * This is crucial for **type-safety**, ensuring `U` conforms to `T`.
+ */
+type AssertSubtype<T, U extends T> = U;
