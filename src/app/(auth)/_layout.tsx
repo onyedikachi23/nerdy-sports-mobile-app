@@ -18,7 +18,7 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function AuthLayout() {
 	return (
 		<BoxScreen
-			className="relative items-center justify-end gap-12"
+			className="relative items-center justify-center gap-12"
 			style={{
 				paddingBottom: BOX_SCREEN_PADDING * 2,
 			}}>
