@@ -77,10 +77,17 @@ type DistributedPick<T, K extends keyof never> = T extends unknown
  */
 type SafePick<T, K extends keyof T> = DistributedPick<T, K>;
 
-/**Turns a complex intersection of objects into a clean object type */
-type Prettify<T> = {
-	[K in keyof T]: T[K];
-} & {};
+/**
+ * Turns a complex intersection (or union) of objects into a
+ * clean object type.
+ *
+ * It is distributive when T is a union.
+ */
+type Prettify<T> = T extends unknown
+	? {
+			[K in keyof T]: T[K];
+		} & {}
+	: never;
 
 /**
  * Converts a union of types (`U = A | B`) into an intersection of those types (`=> A & B`).
@@ -127,7 +134,8 @@ type NonNullableValues<T> = {
 /**
  * Asserts that type `U` is a subtype of type `T`.
  *
- * If `U` is a subtype of `T`, it returns `U`; otherwise, it returns `never`.
+ * If `U` is a subtype of `T`, it returns `U`; otherwise,
+ * TypeScript errors.
  *
  * This is crucial for **type-safety**, ensuring `U` conforms to `T`.
  */
