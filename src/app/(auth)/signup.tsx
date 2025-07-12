@@ -10,10 +10,10 @@ import {
 	type FormFieldBuilder,
 } from "@/components/app/auth/form-field";
 import { SubmitButton } from "@/components/app/auth/submit-button";
+import { Form } from "@/components/ui-extended/form";
 import { Image } from "@/components/ui-extended/image";
 import { Button, ButtonGroup, ButtonText } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
-import { VStack } from "@/components/ui/vstack";
 import { useForm } from "@tanstack/react-form";
 import { Link } from "expo-router";
 import { Mail, UserRound } from "lucide-react-native";
@@ -77,11 +77,9 @@ export default function SignupRoute() {
 			confirmPassword: "",
 		} as SignupForm,
 		validators: {
-			// Pass a schema or function to validate
-			onChange: formSchema,
+			onSubmit: formSchema,
 		},
 		onSubmit: ({ value }) => {
-			// Do something with form data
 			alert(JSON.stringify(value, null, 2));
 		},
 	});
@@ -99,7 +97,7 @@ export default function SignupRoute() {
 				.
 			</Text>
 
-			<VStack space="xl">
+			<Form space="xl">
 				{fieldsBuilder.map(({ name, ...props }) => (
 					<form.Field key={name} name={name}>
 						{(field) => <FormField {...props} field={field} />}
@@ -138,7 +136,7 @@ export default function SignupRoute() {
 						</ButtonText>
 					</Button>
 				</Link>
-			</VStack>
+			</Form>
 		</Card>
 	);
 }
