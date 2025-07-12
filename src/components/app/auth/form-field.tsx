@@ -4,30 +4,30 @@ import { BlurredGradientBg } from "@/components/app/auth/blurred-gradient-bg";
 import {
 	FormControl,
 	FormControlError,
-	FormControlErrorIcon,
 	FormControlErrorText,
 	FormControlHelper,
 	FormControlHelperText,
 	FormControlLabel,
+	FormControlLabelAsterisk,
 	FormControlLabelText,
-} from "@/components/ui/form-control";
-import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
+} from "@/components/ui-extended/form";
+import {
+	FormInput,
+	FormInputField,
+	FormInputIcon,
+	FormInputSlot,
+	type FormInputFieldProps,
+} from "@/components/ui-extended/input";
+import {} from "@/components/ui/input";
 import { isObject, type PlainObject } from "@/lib/utils/type-guards";
 import type { DeepKeys } from "@tanstack/react-form";
-import {
-	AlertCircleIcon,
-	Eye,
-	EyeOff,
-	type LucideIcon,
-} from "lucide-react-native";
+import { Eye, EyeOff, type LucideIcon } from "lucide-react-native";
 import React from "react";
 import type z from "zod/v4";
 import type { FieldApiWithDefaults } from "./types";
 
-type InputFieldProps = React.ComponentProps<typeof InputField>;
-
 interface BaseInputWithIconProps
-	extends Pick<InputFieldProps, "type" | "onChangeText"> {
+	extends Pick<FormInputFieldProps, "type" | "onChangeText"> {
 	icon?: LucideIcon;
 	placeholder: string;
 	value?: string;
@@ -69,33 +69,32 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 	) satisfies InputWithIconProps["type"];
 
 	return (
-		<Input
+		<FormInput
 			variant="rounded"
 			className="h-auto rounded-2xl bg-background-900 px-4 py-2">
-			<InputField
+			<FormInputField
 				placeholder={placeholder}
 				onChangeText={onChangeText}
 				value={value}
 				type={type}
-				returnKeyType="next"
 			/>
-			<InputSlot
+			<FormInputSlot
 				onPress={() =>
 					isPasswordInput && setIsPasswordShown((prev) => !prev)
 				}
 				focusOnPress={!isPasswordInput}
 				className="relative p-2">
 				<BlurredGradientBg className="rounded-lg" />
-				<InputIcon as={icon} />
-			</InputSlot>
-		</Input>
+				<FormInputIcon as={icon} />
+			</FormInputSlot>
+		</FormInput>
 	);
 };
 
 interface BaseFormFieldProps
 	extends SafeOmit<
 		React.ComponentProps<typeof FormControl>,
-		"isInvalid" | "children"
+		"isInvalid" | "children" | "isRequired"
 	> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	field: FieldApiWithDefaults<any, any, string>;
@@ -104,10 +103,7 @@ interface BaseFormFieldProps
 }
 
 type FormFieldProps = BaseFormFieldProps &
-	SafePick<
-		InputWithIconProps,
-		"onChangeText" | "placeholder" | "icon" | "type"
-	>;
+	Pick<InputWithIconProps, "onChangeText" | "placeholder" | "icon" | "type">;
 
 export type FormFieldBuilder<TForm extends PlainObject> = SafeOmit<
 	FormFieldProps,
@@ -138,9 +134,11 @@ export const FormField: React.FC<FormFieldProps> = ({
 	field,
 	icon,
 	type,
+	size = "md",
+	...props
 }) => {
 	const { state, handleChange, name } = field;
-	const isValid = state.meta.isValid;
+	const isInValid = !state.meta.isValid;
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const errorToDisplay = state.meta.errors[0]; // we display one error at a time.
@@ -154,16 +152,17 @@ export const FormField: React.FC<FormFieldProps> = ({
 	}
 
 	return (
-		<FormControl
-			isInvalid={!isValid}
-			size="md"
-			isDisabled={false}
-			isReadOnly={false}
-			isRequired={true}>
+		<FormControl {...props} size={size} isInvalid={isInValid}>
 			<FormControlLabel>
 				<FormControlLabelText className="capitalize">
 					{label}
 				</FormControlLabelText>
+
+				{isInValid && (
+					<FormControlLabelAsterisk className="text-error-500">
+						*
+					</FormControlLabelAsterisk>
+				)}
 			</FormControlLabel>
 
 			<InputWithIcon
@@ -178,7 +177,6 @@ export const FormField: React.FC<FormFieldProps> = ({
 			)}
 
 			<FormControlError className="items-start">
-				<FormControlErrorIcon as={AlertCircleIcon} />
 				<FormControlErrorText>
 					{isZodErrorObj(errorToDisplay) && errorToDisplay.message}
 				</FormControlErrorText>
