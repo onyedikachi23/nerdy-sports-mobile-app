@@ -61,23 +61,6 @@ type DistributedOmit<T, K extends keyof never> = T extends unknown
 type SafeOmit<T, K extends keyof T> = DistributedOmit<T, K>;
 
 /**
- * Distributes the `Pick` utility type over a union.
- * This means if `T` is a union (`A | B`), `DistributedPick<T, K>`
- * will apply `Pick` to each member of the union individually
- * (`Pick<A, K> | Pick<B, K>`).
- *
- * @see {@link DistributedOmit}
- */
-type DistributedPick<T, K extends keyof never> = T extends unknown
-	? Pick<T, K>
-	: never;
-
-/**
- * An alias for {@link DistributedPick}.
- */
-type SafePick<T, K extends keyof T> = DistributedPick<T, K>;
-
-/**
  * Turns a complex intersection (or union) of objects into a
  * clean object type.
  *
