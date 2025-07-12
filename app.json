@@ -1,43 +1,42 @@
 {
-	"expo": {
-		"name": "Nerdy Sports",
-		"slug": "nerdy-sports",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "src/assets/images/icon.png",
-		"scheme": "nerdy-sports",
-		"userInterfaceStyle": "dark",
-		"newArchEnabled": true,
-		"ios": {
-			"supportsTablet": true,
-			"bundleIdentifier": "com.onyedikachi23.nerdysports"
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "src/assets/images/adaptive-icon.png",
-				"backgroundColor": "#0F172A"
-			},
-			"package": "com.onyedikachi23.nerdysports",
-			"edgeToEdgeEnabled": true,
-			"googleServicesFile": "./google-services.json"
-		},
-		"plugins": [
-			"expo-router",
-			[
-				"expo-splash-screen",
-				{
-					"image": "src/assets/images/splash-icon.png",
-					"imageWidth": 200,
-					"resizeMode": "contain",
-					"backgroundColor": "#0F172A"
-				}
-			],
-			"expo-font",
-			"expo-web-browser",
-			"@react-native-google-signin/google-signin"
-		],
-		"experiments": {
-			"typedRoutes": true
-		}
-	}
+  "expo": {
+    "name": "Nerdy Sports",
+    "slug": "nerdy-sports",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "src/assets/images/icon.png",
+    "scheme": "nerdy-sports",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#0F172A"
+      },
+      "package": "com.nerdysports.app",
+      "edgeToEdgeEnabled": true,
+      "googleServicesFile": "./google-services.json"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "src/assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#0F172A"
+        }
+      ],
+      "expo-font",
+      "expo-web-browser",
+      "@react-native-google-signin/google-signin"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "ios": {
+      "bundleIdentifier": "com.nerdysports.app"
+    }
+  }
 }
