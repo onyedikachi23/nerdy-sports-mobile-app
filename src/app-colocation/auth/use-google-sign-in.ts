@@ -38,10 +38,12 @@ export const useGoogleSignin = () => {
 			setIsPending(true);
 			await promptAsync();
 		} catch (err) {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-			const errorObj: Error = Error.isError(err)
-				? err
-				: new Error(typeof err === "string" ? err : "Unknown error");
+			const errorObj: Error =
+				err instanceof Error
+					? err
+					: new Error(
+							typeof err === "string" ? err : "Unknown error",
+						);
 			throw errorObj;
 		} finally {
 			setIsPending(false);
