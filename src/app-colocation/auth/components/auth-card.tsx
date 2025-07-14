@@ -74,7 +74,7 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
 	</Button>
 );
 
-interface AuthFormButtonProps extends AuthButtonProps {
+interface AuthFormButtonProps extends SafeOmit<AuthButtonProps, "onPress"> {
 	form: FormApiWithDefaults;
 	/**Will be from the mutation state not the form state */
 	isSubmitting: boolean;
@@ -96,6 +96,7 @@ export const AuthFormButton: React.FC<AuthFormButtonProps> = ({
 			return (
 				<AuthButton
 					{...props}
+					onPress={() => void form.handleSubmit()}
 					className={className}
 					disabled={isDisabled}>
 					<ButtonText>{children}</ButtonText>
