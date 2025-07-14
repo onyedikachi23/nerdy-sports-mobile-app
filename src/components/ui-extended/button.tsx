@@ -13,7 +13,7 @@ import type { Pressable } from "react-native";
 
 type GSButtonProps = ReadableProps<typeof GSButton>;
 interface ButtonProps extends SafeOmit<GSButtonProps, "isDisabled" | "ref"> {
-	ref: React.Ref<typeof Pressable>;
+	ref?: React.Ref<typeof Pressable>;
 }
 
 const Button: React.FC<ButtonProps> = ({ disabled, ref, ...props }) => {
