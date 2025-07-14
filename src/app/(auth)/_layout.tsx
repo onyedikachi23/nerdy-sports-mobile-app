@@ -1,11 +1,11 @@
 /** @format */
 
-import { BlurredGradientBg } from "@/components/app/auth/blurred-gradient-bg";
+import { BlurredGradientBg } from "@/app-colocation/auth/components/blurred-gradient-bg";
 import { AppLogoWithText } from "@/components/ui-common/app-logo";
 import {
+	Box,
 	BOX_SCREEN_PADDING,
 	BoxScreen,
-	Box,
 } from "@/components/ui-extended/box";
 import { Image } from "@/components/ui-extended/image";
 import { Slot } from "expo-router";
