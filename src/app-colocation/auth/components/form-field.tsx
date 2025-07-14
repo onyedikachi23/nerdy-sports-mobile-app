@@ -23,7 +23,7 @@ import { isObject, type PlainObject } from "@/lib/utils/type-guards";
 import type { DeepKeys } from "@tanstack/react-form";
 import { Eye, EyeOff, type LucideIcon } from "lucide-react-native";
 import React from "react";
-import type z from "zod/v4";
+import { type z } from "zod";
 import type { FieldApiWithDefaults } from "../../../types/tanstack-form";
 
 interface BaseInputWithIconProps
@@ -138,7 +138,19 @@ export const FormField: React.FC<FormFieldProps> = ({
 	...props
 }) => {
 	const { state, handleChange, name } = field;
-	const isInValid = !state.meta.isValid;
+
+	const { isTouched, isBlurred, isValid } = state.meta;
+
+	/**
+	 * Controls error display during TanStack Form's form-level validation:
+	 * showing errors for actively focused/touched fields, or if the form is in an invaliad submission state.
+	 *
+	 * @see {@link https://github.com/TanStack/form/discussions/1612}
+	 */
+	const shouldShowError =
+		(isTouched && !isBlurred) || !field.form.state.canSubmit;
+
+	const isInValid = !isValid && shouldShowError;
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const errorToDisplay = state.meta.errors[0]; // we display one error at a time.
