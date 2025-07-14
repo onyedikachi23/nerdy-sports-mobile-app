@@ -17,16 +17,12 @@ type ImageProps = Prettify<
 	>
 >;
 
-const Image: React.FC<ImageProps> = ({
-	role = "img",
-	transition = 1000,
-	alt,
-	...props
-}) => {
+const Image: React.FC<ImageProps> = ({ role = "img", alt, ...props }) => {
 	return (
 		<ExpoImage
 			{...props}
 			aria-label={props["aria-label"] ?? alt}
+			alt={alt}
 			role={role}
 		/>
 	);
