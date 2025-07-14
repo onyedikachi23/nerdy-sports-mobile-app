@@ -84,6 +84,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
 
 	return (
 		<Animated.View
+			// this animation is usefull for cases where loading of the next route takes time
 			style={animatedStyle} // didn't use tailwind "animate-pulse" cause it was jarring
 		>
 			<Link
