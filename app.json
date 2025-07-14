@@ -5,20 +5,21 @@
 		"version": "1.0.0",
 		"orientation": "portrait",
 		"icon": "src/assets/images/icon.png",
-		"scheme": "nerdy-sports",
+		"scheme": "nerdysports",
 		"userInterfaceStyle": "dark",
 		"newArchEnabled": true,
-		"ios": {
-			"supportsTablet": true,
-			"bundleIdentifier": "com.nerdysports.app"
-		},
 		"android": {
 			"adaptiveIcon": {
 				"foregroundImage": "src/assets/images/adaptive-icon.png",
 				"backgroundColor": "#0F172A"
 			},
-			"package": "com.onyedikachi23.nerdysports",
+			"package": "com.nerdysports.platform",
 			"edgeToEdgeEnabled": true
+		},
+		"web": {
+			"bundler": "metro",
+			"output": "server",
+			"favicon": "src/assets/images/icon.png"
 		},
 		"plugins": [
 			"expo-router",
@@ -32,10 +33,14 @@
 				}
 			],
 			"expo-font",
-			"expo-web-browser"
+			"expo-web-browser",
+			"expo-secure-store"
 		],
 		"experiments": {
 			"typedRoutes": true
+		},
+		"ios": {
+			"bundleIdentifier": "com.nerdysports.app"
 		}
 	}
 }
