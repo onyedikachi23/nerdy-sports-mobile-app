@@ -19,7 +19,7 @@ import { Text } from "@/components/ui/text";
 import { useForm } from "@tanstack/react-form";
 import { Mail, UserRound } from "lucide-react-native";
 import React from "react";
-import { z } from "zod/v4";
+import { z } from "zod";
 
 const StrongPasswordSchema = z
 	.string()
@@ -78,7 +78,7 @@ export default function SignupRoute() {
 			confirmPassword: "",
 		} as SignupForm,
 		validators: {
-			onSubmit: formSchema,
+			onChange: formSchema,
 		},
 		onSubmit: ({ value }) => {
 			alert(JSON.stringify(value, null, 2));
