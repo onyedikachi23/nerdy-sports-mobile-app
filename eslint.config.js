@@ -60,12 +60,16 @@ export default tseslint.config(
 				{
 					paths: [
 						{
-							name: "zod",
-							message: `Please use 'zod/v4' instead of the base 'zod' import. Versioning with subpaths ("zod/v4"): https://github.com/colinhacks/zod/issues/4371`,
+							name: "zod/v3",
+							message: `Please use 'zod' instead of the 'zod/v3' import.See https://github.com/colinhacks/zod/releases/tag/v4.0.1`,
+						},
+						{
+							name: "zod/v4",
+							message: `Please use 'zod' instead of the 'zod/v4' import.See https://github.com/colinhacks/zod/releases/tag/v4.0.1`,
 						},
 						{
 							name: "zod/v4-mini",
-							message: `Please use 'zod/v4' instead of the 'zod/v4-mini' import. Versioning with subpaths ("zod/v4"): https://github.com/colinhacks/zod/issues/4371`,
+							message: `Please use 'zod' instead of the 'zod/v4-mini' import. We do not intend to use the mini version.`,
 						},
 					],
 				},
