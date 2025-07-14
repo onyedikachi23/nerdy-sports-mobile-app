@@ -43,7 +43,7 @@ export const AuthCardDescription: React.FC<AuthCompProps> = ({
 	className,
 	children,
 }) => (
-	<Text size="2xl" className={cn("text-center capitalize", className)}>
+	<Text size="sm" className={cn("text-center", className)}>
 		{children}
 	</Text>
 );
