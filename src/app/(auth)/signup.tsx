@@ -1,21 +1,20 @@
 /** @format */
 
-import { useGoogleSignin } from "@/app-colocation/auth/use-google-sign-in";
+import {
+	AuthButtonGroup,
+	AuthCard,
+	AuthCardDescription,
+	AuthCardHeading,
+	AuthFormButton,
+	AuthGoogleButton,
+	AuthLinkButton,
+} from "@/app-colocation/auth/components/auth-card";
 import {
 	FormField,
 	type FormFieldBuilder,
-} from "@/components/app/auth/form-field";
-import { SubmitButton } from "@/components/app/auth/submit-button";
-import { LinkButton } from "@/components/ui-common/link-button";
+} from "@/app-colocation/auth/components/form-field";
+import { useGoogleSignin } from "@/app-colocation/auth/use-google-sign-in";
 import { Form } from "@/components/ui-extended/form";
-import { Image } from "@/components/ui-extended/image";
-import {
-	Button,
-	ButtonGroup,
-	ButtonText,
-} from "@/components/ui-extended/button";
-import { Card } from "@/components/ui/card";
-import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 import { useForm } from "@tanstack/react-form";
 import { Mail, UserRound } from "lucide-react-native";
@@ -89,60 +88,44 @@ export default function SignupRoute() {
 	const { signIn: googleSignup, isPending } = useGoogleSignin();
 
 	return (
-		<Card variant={"ghost"} className="gap-4">
-			<Heading size="2xl" className="text-center capitalize">
-				Sign up
-			</Heading>
-			<Text size="sm" className="text-center">
+		<AuthCard>
+			<AuthCardHeading>Sign up</AuthCardHeading>
+			<AuthCardDescription>
 				Sign up to club,{" "}
 				<Text bold className="text-primary-300">
 					NerdySports
 				</Text>
 				.
-			</Text>
+			</AuthCardDescription>
 
-			<Form space="xl">
+			<Form>
 				{fieldsBuilder.map(({ name, ...props }) => (
 					<form.Field key={name} name={name}>
 						{(field) => <FormField {...props} field={field} />}
 					</form.Field>
 				))}
 
-				<ButtonGroup className="my-4">
-					<SubmitButton
+				<AuthButtonGroup>
+					<AuthFormButton
 						form={form}
-						action="secondary"
-						className="h-16 rounded-2xl"
-						size="xl">
+						isSubmitting={false} // TODO: Replace with actual mutation state
+					>
 						Sign up
-					</SubmitButton>
+					</AuthFormButton>
 
-					<Button
+					<AuthGoogleButton
 						disabled={isPending}
 						onPress={() => {
 							void googleSignup();
-						}}
-						className="flex h-16 justify-center rounded-2xl bg-background-900 data-[active=true]:bg-background-700"
-						size="xl">
-						<Image
-							source={{
-								uri: "https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B",
-							}}
-							alt="Google logo"
-							className="size-8"
-						/>
-						<ButtonText className="capitalize text-typography-900 data-[active=true]:text-typography-700">
-							Google Sign up
-						</ButtonText>
-					</Button>
-				</ButtonGroup>
+						}}>
+						Google Sign up
+					</AuthGoogleButton>
+				</AuthButtonGroup>
 
-				<LinkButton href={"/login"} variant="link" size="sm">
-					<ButtonText className="text-primary-300 data-[active=true]:text-primary-500">
-						Already have an account?
-					</ButtonText>
-				</LinkButton>
+				<AuthLinkButton href={"/login"}>
+					Already have an account?
+				</AuthLinkButton>
 			</Form>
-		</Card>
+		</AuthCard>
 	);
 }
