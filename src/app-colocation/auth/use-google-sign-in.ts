@@ -13,19 +13,10 @@ import { GOOGLE_AUTH_AUTHORIZE_PATH } from "../api/constants";
 
 WebBrowser.maybeCompleteAuthSession();
 
-/**
- * @see {@link https://developers.google.com/identity#google-sign-in}
- */
-type GoogleSigninScope = "openid" | "profile" | "email";
-interface GoogleAuthRequestConfig extends AuthRequestConfig {
-	scopes: GoogleSigninScope[];
-}
-
 const config = {
 	clientId: "google", // actual client id will be provided on the authorize api route
-	scopes: ["openid", "profile", "email"],
 	redirectUri: makeRedirectUri(),
-} satisfies GoogleAuthRequestConfig;
+} satisfies AuthRequestConfig;
 
 const discovery = {
 	authorizationEndpoint: BASE_URL + GOOGLE_AUTH_AUTHORIZE_PATH,
@@ -33,7 +24,7 @@ const discovery = {
 } satisfies DiscoveryDocument;
 
 export const useGoogleSignin = () => {
-	const [request, response, promptAsync] = useAuthRequest(config, discovery);
+	const [_, response, promptAsync] = useAuthRequest(config, discovery);
 
 	React.useEffect(() => {
 		if (response) {
@@ -41,16 +32,21 @@ export const useGoogleSignin = () => {
 		}
 	}, [response]);
 
+	const [isPending, setIsPending] = React.useState(false);
 	const signIn = React.useCallback(async () => {
 		try {
+			setIsPending(true);
 			await promptAsync();
 		} catch (err) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			const errorObj: Error = Error.isError(err)
 				? err
 				: new Error(typeof err === "string" ? err : "Unknown error");
-			return Promise.reject(errorObj);
+			throw errorObj;
+		} finally {
+			setIsPending(false);
 		}
 	}, [promptAsync]);
 
-	return { signIn };
+	return { signIn, isPending };
 };
