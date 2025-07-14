@@ -1,6 +1,7 @@
 /** @format */
 import type React from "react";
 
-type ReadableProps<T extends React.ComponentType> = Prettify<
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ReadableProps<T extends React.ComponentType<any>> = Prettify<
 	React.ComponentProps<T>
 >;
