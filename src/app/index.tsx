@@ -2,7 +2,7 @@
 
 /** @format */
 
-import { ButtonGroup } from "@/components/ui/button";
+import { ButtonGroup, ButtonText } from "@/components/ui-extended/button";
 
 /** @format */
 
@@ -16,22 +16,31 @@ import { Box } from "@/components/ui/box";
 
 import { Image } from "@/components/ui-extended/image";
 
-import { AuthButton as ExternalAuthButton } from "@/components/app/auth/auth-button";
+import { LinkButton } from "@/components/ui-common/link-button";
 import { BoxScreen } from "@/components/ui-extended/box";
 import { ThemedLinearGradient } from "@/components/ui-extended/linear-gradient";
-import { Link } from "expo-router";
 import type React from "react";
+import { cn } from "@/lib/utils";
 
-const AuthButton: typeof ExternalAuthButton = ({
+interface AuthButtonProps {
+	authAction: "signup" | "login";
+	children: string;
+	className?: string;
+}
+
+const AuthButton: React.FC<AuthButtonProps> = ({
 	authAction,
 	children,
-	...props
+	className,
 }) => (
-	<Link href={`/${authAction}`} asChild>
-		<ExternalAuthButton {...props} authAction={authAction}>
-			{children}
-		</ExternalAuthButton>
-	</Link>
+	<LinkButton
+		href={`/${authAction}`}
+		action={authAction === "signup" ? "secondary" : "primary"}
+		variant={"solid"}
+		size={"xl"}
+		className={cn("rounded-full", className)}>
+		<ButtonText className="flex-1 text-center">{children}</ButtonText>
+	</LinkButton>
 );
 
 export default function HomeScreen() {
@@ -71,7 +80,9 @@ export default function HomeScreen() {
 								<AuthButton authAction="signup">
 									Join now!
 								</AuthButton>
-								<AuthButton authAction="login">
+								<AuthButton
+									authAction="login"
+									className="border">
 									Log in
 								</AuthButton>
 							</ButtonGroup>
