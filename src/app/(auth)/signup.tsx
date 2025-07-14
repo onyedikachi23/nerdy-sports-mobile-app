@@ -1,10 +1,6 @@
 /** @format */
 
-import { Card } from "@/components/ui/card";
-import { Heading } from "@/components/ui/heading";
-
-/** @format */
-
+import { useGoogleSignin } from "@/app-colocation/auth/use-google-sign-in";
 import {
 	FormField,
 	type FormFieldBuilder,
@@ -13,6 +9,8 @@ import { SubmitButton } from "@/components/app/auth/submit-button";
 import { Form } from "@/components/ui-extended/form";
 import { Image } from "@/components/ui-extended/image";
 import { Button, ButtonGroup, ButtonText } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 import { useForm } from "@tanstack/react-form";
 import { Link } from "expo-router";
@@ -84,6 +82,8 @@ export default function SignupRoute() {
 		},
 	});
 
+	const { signIn: googleSignup, isPending } = useGoogleSignin();
+
 	return (
 		<Card variant={"ghost"} className="gap-4">
 			<Heading size="2xl" className="text-center capitalize">
@@ -114,6 +114,10 @@ export default function SignupRoute() {
 					</SubmitButton>
 
 					<Button
+						disabled={isPending}
+						onPress={() => {
+							void googleSignup();
+						}}
 						className="flex h-16 justify-center rounded-2xl bg-background-900 data-[active=true]:bg-background-700"
 						size="xl">
 						<Image
