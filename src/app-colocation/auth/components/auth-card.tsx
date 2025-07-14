@@ -1,23 +1,23 @@
 /** @format */
 
 import {
+	LinkButton,
+	type LinkButtonProps,
+} from "@/components/ui-common/link-button";
+import {
 	Button,
+	ButtonGroup,
 	ButtonText,
 	type ButtonGroupProps,
 	type ButtonProps,
 } from "@/components/ui-extended/button";
 import { Image } from "@/components/ui-extended/image";
-import { ButtonGroup } from "@/components/ui-extended/button";
 import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
+import type { FormApiWithDefaults } from "@/types/tanstack-form";
 import type React from "react";
-import {
-	LinkButton,
-	type LinkButtonProps,
-} from "@/components/ui-common/link-button";
-import type { FormApiWithDefaults } from "@/components/app/auth/types";
 
 interface AuthCompProps {
 	children: React.ReactNode;

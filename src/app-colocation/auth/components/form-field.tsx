@@ -24,7 +24,7 @@ import type { DeepKeys } from "@tanstack/react-form";
 import { Eye, EyeOff, type LucideIcon } from "lucide-react-native";
 import React from "react";
 import type z from "zod/v4";
-import type { FieldApiWithDefaults } from "../../../components/app/auth/types";
+import type { FieldApiWithDefaults } from "../../../types/tanstack-form";
 
 interface BaseInputWithIconProps
 	extends Pick<FormInputFieldProps, "type" | "onChangeText"> {
