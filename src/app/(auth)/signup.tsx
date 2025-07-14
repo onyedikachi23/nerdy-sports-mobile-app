@@ -76,7 +76,7 @@ export default function SignupRoute() {
 			email: "",
 			password: "",
 			confirmPassword: "",
-		} as SignupForm,
+		} satisfies SignupForm,
 		validators: {
 			onChange: formSchema,
 		},
