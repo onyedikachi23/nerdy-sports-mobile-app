@@ -6,14 +6,18 @@ import {
 	type FormFieldBuilder,
 } from "@/components/app/auth/form-field";
 import { SubmitButton } from "@/components/app/auth/submit-button";
+import { LinkButton } from "@/components/ui-common/link-button";
 import { Form } from "@/components/ui-extended/form";
 import { Image } from "@/components/ui-extended/image";
-import { Button, ButtonGroup, ButtonText } from "@/components/ui/button";
+import {
+	Button,
+	ButtonGroup,
+	ButtonText,
+} from "@/components/ui-extended/button";
 import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 import { useForm } from "@tanstack/react-form";
-import { Link } from "expo-router";
 import { Mail, UserRound } from "lucide-react-native";
 import React from "react";
 import { z } from "zod/v4";
@@ -133,13 +137,11 @@ export default function SignupRoute() {
 					</Button>
 				</ButtonGroup>
 
-				<Link href={"/login"} asChild>
-					<Button variant="link" size="sm">
-						<ButtonText className="text-primary-300 data-[active=true]:text-primary-500">
-							Already have an account?
-						</ButtonText>
-					</Button>
-				</Link>
+				<LinkButton href={"/login"} variant="link" size="sm">
+					<ButtonText className="text-primary-300 data-[active=true]:text-primary-500">
+						Already have an account?
+					</ButtonText>
+				</LinkButton>
 			</Form>
 		</Card>
 	);
