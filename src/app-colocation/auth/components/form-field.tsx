@@ -1,6 +1,6 @@
 /** @format */
 
-import { BlurredGradientBg } from "@/components/app/auth/blurred-gradient-bg";
+import { BlurredGradientBg } from "@/app-colocation/auth/components/blurred-gradient-bg";
 import {
 	FormControl,
 	FormControlError,
@@ -24,7 +24,7 @@ import type { DeepKeys } from "@tanstack/react-form";
 import { Eye, EyeOff, type LucideIcon } from "lucide-react-native";
 import React from "react";
 import type z from "zod/v4";
-import type { FieldApiWithDefaults } from "./types";
+import type { FieldApiWithDefaults } from "../../../components/app/auth/types";
 
 interface BaseInputWithIconProps
 	extends Pick<FormInputFieldProps, "type" | "onChangeText"> {
