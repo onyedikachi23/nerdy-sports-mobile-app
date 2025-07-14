@@ -12,11 +12,11 @@ import {
 	FormControlLabelText,
 } from "@/components/ui-extended/form";
 import {
-	FormInput,
-	FormInputField,
-	FormInputIcon,
-	FormInputSlot,
-	type FormInputFieldProps,
+	Input,
+	InputField,
+	InputIcon,
+	InputSlot,
+	type InputFieldProps,
 } from "@/components/ui-extended/input";
 import {} from "@/components/ui/input";
 import { isObject, type PlainObject } from "@/lib/utils/type-guards";
@@ -27,7 +27,7 @@ import type z from "zod/v4";
 import type { FieldApiWithDefaults } from "../../../types/tanstack-form";
 
 interface BaseInputWithIconProps
-	extends Pick<FormInputFieldProps, "type" | "onChangeText"> {
+	extends Pick<InputFieldProps, "type" | "onChangeText"> {
 	icon?: LucideIcon;
 	placeholder: string;
 	value?: string;
@@ -69,25 +69,25 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 	) satisfies InputWithIconProps["type"];
 
 	return (
-		<FormInput
+		<Input
 			variant="rounded"
 			className="h-auto rounded-2xl bg-background-900 px-4 py-2">
-			<FormInputField
+			<InputField
 				placeholder={placeholder}
 				onChangeText={onChangeText}
 				value={value}
 				type={type}
 			/>
-			<FormInputSlot
+			<InputSlot
 				onPress={() =>
 					isPasswordInput && setIsPasswordShown((prev) => !prev)
 				}
 				focusOnPress={!isPasswordInput}
 				className="relative p-2">
 				<BlurredGradientBg className="rounded-lg" />
-				<FormInputIcon as={icon} />
-			</FormInputSlot>
-		</FormInput>
+				<InputIcon as={icon} />
+			</InputSlot>
+		</Input>
 	);
 };
 
