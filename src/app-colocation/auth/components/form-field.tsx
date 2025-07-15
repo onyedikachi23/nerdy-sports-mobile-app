@@ -142,13 +142,19 @@ export const FormField: React.FC<FormFieldProps> = ({
 	const { isTouched, isBlurred, isValid } = state.meta;
 
 	/**
-	 * Controls error display during TanStack Form's form-level validation:
-	 * showing errors for actively focused/touched fields, or if the form is in an invaliad submission state.
+	 * Determines when to show a field's validation error message.
+	 * This logic attempts to mimic `mode=onChange` validation behavior (like
+	 * React Hook Form), displaying errors either during active field
+	 * interaction (typing/focus) or after an invalid form submission attempt.
 	 *
 	 * @see {@link https://github.com/TanStack/form/discussions/1612}
 	 */
 	const shouldShowError =
-		(isTouched && !isBlurred) || !field.form.state.canSubmit;
+		// the field is currently actively interacted with.
+		(isTouched && !isBlurred) ||
+		// the form has been submitted at least once AND is currently invalid.
+		(!field.form.state.canSubmit &&
+			field.form.state.submissionAttempts > 0);
 
 	const isInValid = !isValid && shouldShowError;
 
