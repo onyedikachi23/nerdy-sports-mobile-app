@@ -85,7 +85,7 @@ export default function SignupRoute() {
 		},
 	});
 
-	const { signIn: googleSignup, isPending } = useGoogleSignin();
+	const { signIn: googleSignup, isPending } = useGoogleSignin("signup");
 
 	return (
 		<AuthCard>
