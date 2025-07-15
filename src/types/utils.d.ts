@@ -123,3 +123,10 @@ type NonNullableValues<T> = {
  * This is crucial for **type-safety**, ensuring `U` conforms to `T`.
  */
 type AssertSubtype<T, U extends T> = U;
+
+/**
+ * Ensures an object has all the keys of type `T`, allowing any value type.
+ *
+ * Useful with `satisfies` keyword to validate key presence without strict value type matching.
+ */
+type HasKeysOf<T> = Record<keyof T, unknown>;
